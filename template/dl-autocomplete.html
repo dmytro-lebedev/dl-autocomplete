@@ -1,0 +1,10 @@
+<ul class="dl-autocomplete" ng-show="vm.isOpen()">
+    <li class="dl-autocomplete__match"
+        ng-repeat="match in vm.matches track by $index"
+        ng-class="{active: vm.isActiveMatch($index)}"
+        ng-mouseenter="vm.setActiveMatch($index)"
+        ng-mouseleave="vm.setActiveMatch(null)"
+        ng-click="vm.selectMatch($index)">
+        {{match}}
+    </li>
+</ul>

@@ -1,0 +1,22 @@
+<!doctype html>
+<html
+    xmlns:ng="http://angularjs.org"
+    ng-app="dlebedev.dl-autocomplete.demo.app"
+    ng-controller="DemoAppCtrl as demoAppVm">
+
+    <head>
+        <title ng-bind="demoAppVm.title"></title>
+
+        <link href="/src/dl-autocomplete.css" rel="stylesheet" type="text/css">
+    </head>
+
+    <body>
+        <p>Search via Google Maps Geocoding API: <span ng-bind="demoAppVm.query"></span></p>
+        <input type="text" ng-model="demoAppVm.query" dl-autocomplete="demoAppVm.getAddresses(demoAppVm.query)">
+
+        <script src="https://code.jquery.com/jquery-1.12.2.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.js"></script>
+        <script src="/src/dl-autocomplete.js"></script>
+        <script src="/demo/js/app.js"></script>
+    </body>
+</html>
