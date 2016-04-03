@@ -23,11 +23,7 @@
         return directive;
 
         function link(scope, element, attrs, ngModel) {
-            scope.vm.element = element;
-            scope.vm.attrs = attrs;
-            scope.vm.ngModel = ngModel;
-
-            scope.vm.init();
+            scope.vm.init(element, attrs, ngModel);
         }
     }
 
@@ -35,19 +31,20 @@
 
     function AutocompleteCtrl($scope, $parse, $q) {
         var vm = this;
+        
         vm.element = null;
         vm.attrs = null;
         vm.ngModel = null;
-        vm.query = null;
         vm.matches = [];
+        vm.bOpen = false;
+        vm.idxActiveMatch = null;
+                
         vm.init = init;
         vm.updateMatches = updateMatches;
         vm.hasMatches = hasMatches;
         vm.watchNgModelChange = watchNgModelChange;
         vm.listenKeyboardEvents = listenKeyboardEvents;
-        vm.bOpen = false;
         vm.isOpen = isOpen;
-        vm.idxActiveMatch = null;
         vm.isActiveMatch = isActiveMatch;
         vm.setActiveMatch = setActiveMatch;
         vm.hasActiveMatch = hasActiveMatch;
@@ -57,7 +54,18 @@
         vm.decActiveMatch = decActiveMatch;
         vm.hideMatches = hideMatches;
 
-        function init() {
+        /**
+         * Autocomplete directive constructor.
+         *
+         * @param {Object} element The jqLite-wrapped element that this directive matches
+         * @param {Object} attrs Hash object with key-value pairs of normalized attribute names and their corresponding attribute values
+         * @param {Object} ngModel The directive's required NgModelController instance
+         */
+        function init(element, attrs, ngModel) {
+            vm.element = element;
+            vm.attrs = attrs;
+            vm.ngModel = ngModel;
+            
             vm.element
                 .find('.dl-autocomplete')
                 .insertAfter(vm.element);
